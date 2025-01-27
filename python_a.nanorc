@@ -1,0 +1,69 @@
+syntax python "\.py$"
+header "^#!.*python"
+magic "Python script"
+comment "#"
+
+## Alternative linter: pylint --exit-zero
+linter pyflakes
+
+## All words
+color brightblack "[a-zA-Z_]+"
+
+## All numbers - decimal, hex, binary, and octal
+color magenta "-?[0-9]+"
+color magenta "0[Xx][0-9a-fA-F]+"
+color magenta "0[Bb][0-1]+"
+color magenta "0[Oo][0-7]+"
+
+## Function definitions
+color normal "def [0-9A-Za-z_]+"
+
+## Keywords
+color white "\<(and|as|assert|async|await|break|class|continue)\>"
+color white "\<(def|del|elif|else|except|finally|for|from)\>"
+color white "\<(global|if|import|in|is|lambda|nonlocal|not|or)\>"
+color white "\<(pass|raise|return|try|while|with|yield)\>"
+color white "\<(abs|append|apply|buffer|callable|chr|clear|close|closed|cmp|coerce|compile|complex|conjugate|copy|count|delattr|dir|divmod)\>"
+color white "\<(eval|execfile|exec|extend|fileno|filter|float|flush|get|getattr|globals|has_key|hasattr|hash|hex|id|index|input|insert|int|intern)\>"
+color white "\<(isatty|isinstance|issubclass|items|keys|len|list|locals|long|map|max|min|mode|name|oct|open|ord|pop|pow|print|range|raw_input)\>"
+color white "\<(read|readline|readlines|reduce|reload|remove|repr|reverse|round|seek|setattr|slice|softspace|sort|str|tell|truncate|tuple|type)\>"
+color white "\<(unichr|unicode|update|values|vars|write|writelines|xrange|zip|bool)\>"
+color white "\<(__builtin__|__dict__|__methods__|__members__|__class__|__bases__|__import__|__name__|__doc__|__self__|__debug__)\>"
+
+## These two are keywords in Python 2, but functions in Python 3,
+## so only color them when they are followed by whitespace, assuming
+## that print(x) is a function invocation and print (x) is a statement
+color white "\<(exec|print)([[:blank:]]|$)"
+
+## Special values
+color white "\<(False|None|True)\>"
+
+## Decorators
+color cyan "@[[:alpha:]_][[:alnum:]_.]*"
+
+## First operator color
+color cyan "[.:+*|=?!\%()]" "<" ">" "/" "-" "&"
+
+## Second operator color
+color green "[,;{}]" "\[" "\]" "\s+(=)\s+"
+
+## Mono-quoted strings
+color blue "'([^'\]|\\.)*'|"([^"\]|\\.)*"|'''|""""
+color blue "'''|""""
+
+## Comments
+color red "(^|[[:blank:]])#.*"
+
+## Triple-quoted strings
+color blue start="'''([^'),]|$)" end="(^|[^(\])'''"
+color blue start=""""([^"),]|$)" end="(^|[^(\])""""
+
+## Backslash escapes
+color yellow "\\($|[\'"abfnrtv]|[0-3]?[0-7]?[0-7]|x[[:xdigit:]]{2})"
+color yellow "\\(N\{[[:alpha:]]+\}|u[[:xdigit:]]{4}|U[[:xdigit:]]{8})"
+
+## Reminders
+color brightwhite,yellow "\<(FIXME|TODO|XXX)\>"
+
+## Trailing whitespace
+color ,green "[[:space:]]+$"

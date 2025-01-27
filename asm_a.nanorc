@@ -1,0 +1,56 @@
+syntax "ASM" "\.(S|s|asm)$"
+magic "assembler source"
+comment "//"
+
+## All words
+color brightblack "[a-zA-Z_]+"
+
+## All numbers - decimal, hex, binary, and octal
+color magenta "-?[0-9]+"
+color magenta "0[Xx][0-9a-fA-F]+" "[0-9a-fA-F]+h"
+color magenta "0[Bb][0-1]+" "[0-1]+b"
+color magenta "0[Oo][0-7]+" "[0-7]+o"
+
+## Most x86-64 registers
+icolor brightblue "\<([er]?[a-d][lhx]|r[0-9]+[bdw]?|[er]?[bs]pl?|[er]?[sd]il?|[er]?ip|[er]?flags|[cdefgs]?s)\>"
+icolor brightblue "\<([xyz]?mm[0-9]+|[cd]?r[0-9]+)\>"
+
+## Most common x86 mnemonics
+icolor cyan "\<([kuv]?mov([a-z]+)?([0-9]+)?)\>"
+icolor cyan "\<(j[a-z]{,4}|call|i?ret[dfn]?|loop([a-z]+)?|cmp(s[bdw])?|test|into?|inc?|hlt|esc|nop|out|wait|lock|pause)\>"
+icolor cyan "\<([xf]?addp?|adc|s[bu]b|i?mul|i?div|inc|dec|and|x?or|not|neg|push[adf]?|pop[adf]?)\>"
+icolor cyan "\<(aa[adms]|cl[cdi]|da[as]|cbw|cwd|lea|l[ed]s|lods[bdw]|rc[lr]|rep([a-z]+)?|ro[lr]|sahf|sa[lr]|scas[bdw]|sh[lr]d?|stos[bdw]|xchg|xlat|bt[crs]?|bs[fr]|bswap|rsm|cpuid)\>"
+
+## Keywords, mostly GAS with some extra NASM and TASM keywords sprinkled in as well
+color white "\.(data|subsection|text|bss)"
+color white "\.(align|file|globl|global|hidden|section|size|type|weak)"
+color white "\.(ascii|asciz|byte|double|float|hword|int|long|short|single|struct|word)"
+color white "\<(bits|cpu|assume|nothing|locals|jumps|offset|segment|byte|ptr)\>"
+
+## Operator
+color cyan "[.,:;+*|=?!%(){}]" "/" "\[" "\]" "&" "-"
+
+## Labels
+color white "^[[:blank:]]*[.0-9A-Za-z_]*:"
+
+## Preprocessor directives, GAS and NASM
+color cyan start="^[[:blank:]]*[#%][[:blank:]]*(if(n?def)?|elif|warning|error|pragma|macro|endmacro)\>" end="(\`|[^\])$"
+color cyan "^[[:blank:]]*[#%][[:blank:]]*((define|else|endif|include(_next)?|line|undef|macro|endmacro)\>|$)"
+
+## One character single-quoted stuff (characters, backslash escapes, hex and octal byte codes)
+color yellow "'([^'\]|\\(["'\abfnrtv]|x[[:xdigit:]]{1,2}|[0-3]?[0-7]{1,2}))'"
+
+## Strings and names of included files, single and double quotes
+color blue "'([^']|\\')*'|#[[:blank:]]*include[[:blank:]]*<[^>]+>"
+color blue ""([^"]|\\")*"|#[[:blank:]]*include[[:blank:]]*<[^>]+>"
+
+## Comments
+color red "//[^"]*$|(^|[[:blank:]])//.*"
+color red start="/\*" end="\*/"
+color red ";.+"
+
+## Reminders.
+color brightwhite,yellow "\<(FIXME|TODO|XXX)\>"
+
+## Highlight trailing whitespace
+color ,green "[[:space:]]+$"

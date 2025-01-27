@@ -1,0 +1,40 @@
+syntax html "\.html?$"
+magic "HTML document"
+comment "<!--|-->"
+
+formatter tidy -m -q
+
+## All words
+color brightblack ".+"
+
+## Tags
+color cyan "<[[:alpha:]/!?][^>]*>"
+
+## Bold, italic, underlined, emphasis, and importance
+color magenta "</?(b|i|u|em|strong)>"
+
+## Named character references
+color magenta "&[^;[:space:]]*;"
+
+## Attributes:
+color white "\<(abbr|accept(-charset)?|accesskey|action|alink|align|alt|archive|axis|background|bgcolor|border)="
+color white "\<(cell(padding|spacing)|char(off|set)?|checked|cite|class(id)?|compact|code(base|tag)?|cols(pan)?)="
+color white "\<(content(editable)?|contextmenu|coords|data|datetime|declare|defer|dir|disabled|enctype)="
+color white "\<(for|frame(border)?|headers|height|hidden|href(lang)?|hspace|http-equiv|id|ismap)="
+color white "\<(label|lang|link|longdesc|margin(height|width)|maxlength|media|method|multiple)="
+color white "\<(name|nohref|noresize|noshade|object|onclick|onfocus|onload|onmouseover|profile|readonly|rel|rev)="
+color white "\<(rows(pan)?|rules|scheme|scope|scrolling|selected|shape|size|span|src|standby|start|style|summary)="
+color white "\<(tabindex|target|text|title|type|usemap|valign|value(type)?|vlink|vspace|width|xmlns|xml:space)="
+
+## Template strings (not in the HTML spec, but very commonly used)
+color magenta "\{[^\}]*\}\}?"
+color white "[[:space:]]((end)?if|(end)?for|in|not|(end)?block)[[:space:]]"
+
+## Strings
+color blue ""([^"\]|\\.)*""
+
+## Comments
+color red start="<!--" end="-->"
+
+## Reminders
+color brightwhite,yellow "(FIXME|TODO|XXX)"

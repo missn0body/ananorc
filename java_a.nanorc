@@ -1,0 +1,49 @@
+syntax java "\.java$"
+magic "Java "
+comment "//"
+
+## All words
+color brightblack "[a-zA-Z_]+"
+
+## All numbers - decimal, hex, binary, and octal
+color magenta "-?[0-9]+"
+color magenta "0[Xx][0-9a-fA-F]+"
+color magenta "0[Bb][0-1]+"
+color magenta "0[Oo][0-7]+"
+
+## Keywords
+color white "\<(boolean|byte|char|double|float|int|long|new|short|this|transient|void)\>"
+color white "\<(break|case|catch|continue|default|do|else|finally|for|if|return|switch|throw|try|while)\>"
+color white "\<(abstract|class|extends|final|implements|import|instanceof|interface|native)\>"
+color white "\<(package|private|protected|public|static|strictfp|super|synchronized|throws|volatile)\>"
+color white "\<(true|false|null)\>"
+
+## Labels
+color white "^[[:blank:]]*[A-Z_a-z][0-9A-Z_a-z]*:[[:blank:]]*$"
+color normal ":[[:blank:]]*$"
+
+## First operator color
+color cyan "[.:+*|=?!\%()]" "<" ">" "/" "-" "&"
+
+## Second operator color
+color green "[,;{}]" "\[" "\]" "\s+(=)\s+"
+
+## Single-quoted stuff (characters, backslash escapes, hex and octal byte codes)
+color yellow "'([^'\]|\\(["'\abfnrtv]|x[[:xdigit:]]{1,2}|[0-3]?[0-7]{1,2}))'"
+
+## Strings and names of included files
+color blue ""([^"]|\\")*"|#[[:blank:]]*include[[:blank:]]*<[^>]+>"
+
+## Comments and javadoc
+color red "//.*"
+color red start="/\*" end="\*/"
+color blue start="/\*\*" end="\*/"
+color magenta "@param [a-zA-Z_][a-z0-9A-Z_]+"
+color magenta "@return"
+color magenta "@author.*"
+
+## Reminders
+color brightwhite,yellow "\<(FIXME|TODO|XXX)\>"
+
+## Trailing whitespace
+color ,green "[[:space:]]+$"

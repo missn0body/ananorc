@@ -1,0 +1,64 @@
+syntax "C" "\.(c(c|pp|xx)?|C)$" "\.(h(h|pp|xx)?|H)$" "\.ii?$" "\.(def)$" "\.ino"
+magic "^(C|C\+\+) (source|program)"
+comment "//"
+
+## All words
+color brightblack "[a-zA-Z_]+"
+
+## All numbers - decimal, hex, binary, and octal
+color magenta "-?[0-9]+"
+color magenta "0[Xx][0-9a-fA-F]+"
+color magenta "0[Bb][0-1]+"
+color magenta "0[Oo][0-7]+"
+
+## Keywords
+color white "\<(float|double|bool|char|wchar_t|int|short|long|sizeof|enum|void|static|const|struct|union|typedef|extern|(un)?signed|inline)\>"
+color white "\<((s?size)|(char(16|32))|((u_?)?int(_fast|_least)?(8|16|32|64))|u?int(max|ptr))_t\>"
+color white "\<(class|namespace|template|public|protected|private|typename|this|friend|virtual|using|mutable|volatile|register|explicit)\>"
+color white "\<(for|if|while|do|else|case|default|switch)\>"
+color white "\<(try|throw|catch|operator|new|delete)\>"
+color white "\<((const|dynamic|reinterpret|static)_cast)\>"
+color white "\<(alignas|alignof|asm|auto|compl|concept|constexpr|decltype|export|noexcept|nullptr|requires|static_assert|thread_local|typeid|override|final)\>"
+color white "\<(and|and_eq|bitand|bitor|not|not_eq|or|or_eq|xor|xor_eq)\>"
+color white "\<(goto|continue|break|return)\>"
+
+## Labels.
+color white "^[[:blank:]]*[A-Z_a-z][0-9A-Z_a-z]*:[[:blank:]]*$"
+color normal ":[[:blank:]]*$"
+
+## GCC builtins
+color white "__attribute__[[:space:]]*\(\([^)]*\)\)" "__(aligned|asm|builtin|hidden|inline|packed|restrict|section|typeof|weak)__"
+
+## First operator color
+color cyan "[.:+*|=?!\%()]" "<" ">" "/" "-" "&"
+
+## Second operator color
+color green "[,;{}]" "\[" "\]" "\s+(=)\s+"
+
+## Single-quoted stuff (characters, backslash escapes, hex and octal byte codes)
+color yellow "'([^'\]|\\(["'\abfnrtv]|x[[:xdigit:]]{1,2}|[0-3]?[0-7]{1,2}))'"
+
+## Strings and names of included files
+color blue ""([^"]|\\")*"|#[[:blank:]]*include[[:blank:]]*<[^>]+>"
+
+## printf-family format specifiers
+color magenta "%(\#|(0-+))?(hh|h|l|ll|q|L|j|z|Z|t)?[A-Za-z]" "%%"
+
+## Preprocessor directives
+color cyan start="^[[:blank:]]*#[[:blank:]]*(if(n?def)?|elif|warning|error|pragma)\>" end="(\`|[^\])$"
+color cyan "^[[:blank:]]*#[[:blank:]]*((define|else|endif|include(_next)?|line|undef)\>|$)"
+
+## Comments
+color red "//[^"]*$|(^|[[:blank:]])//.*"
+color red start="/\*" end="\*/"
+
+## Highlighting for documentation comments
+color magenta "@param [a-zA-Z_][a-z0-9A-Z_]+"
+color magenta "@return"
+color magenta "@author.*"
+
+## Reminders.
+color brightwhite,yellow "\<(FIXME|TODO|XXX)\>"
+
+## Trailing whitespace
+color ,green "[[:space:]]+$"
