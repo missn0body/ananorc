@@ -20,7 +20,7 @@ color white "\<(try|throw|catch|operator|new|delete)\>"
 color white "\<((const|dynamic|reinterpret|static)_cast)\>"
 color white "\<(alignas|alignof|asm|auto|compl|concept|constexpr|decltype|export|noexcept|nullptr|requires|static_assert|thread_local|typeid|override|final)\>"
 color white "\<(and|and_eq|bitand|bitor|not|not_eq|or|or_eq|xor|xor_eq)\>"
-color white "\<(goto|continue|break|return)\>"
+color white "\<(goto|continue|break|return|true|false)\>"
 
 ## Labels.
 color white "^[[:blank:]]*[A-Z_a-z][0-9A-Z_a-z]*:[[:blank:]]*$"
