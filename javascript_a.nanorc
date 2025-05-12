@@ -1,0 +1,44 @@
+syntax "JavaScript" "\.(js|ts)$"
+comment "//"
+
+## All text
+color brightblack "[a-zA-Z_]+"
+color brightblack "[A-Za-z_][A-Za-z0-9_]*[[:space:]]*[(]|)"
+
+## All numbers
+color magenta "\<[-+]?([1-9][0-9]*|0[0-7]*|0x[0-9a-fA-F]+)([uU][lL]?|[lL][uU]?)?\>"
+color magenta "\<[-+]?([0-9]+\.[0-9]*|[0-9]*\.[0-9]+)([EePp][+-]?[0-9]+)?[fFlL]?"
+color magenta "\<[-+]?([0-9]+[EePp][+-]?[0-9]+)[fFlL]?"
+color magenta "\\[0-7][0-7]?[0-7]?|\\x[0-9a-fA-F]+|\\[bfnrt'"\?\\]"
+
+## Keywords
+icolor white "\<(break|case|catch|continue|default|delete|do|else|finally)\>"
+icolor white "\<(for|function|get|if|in|instanceof|new|return|set|switch)\>"
+icolor white "\<(switch|this|throw|try|typeof|var|void|while|with)\>"
+icolor white "\<(null|undefined|NaN)\>"
+icolor white "\<(import|as|from|export)\>"
+icolor white "\<(const|let|class|extends|get|set|of|async|await|yield)\>"
+icolor white "\<(true|false)\>"
+icolor white "\<(array|boolean|date|enumerator|error|function|math)\>"
+icolor white "\<(map|weakmap|set|weakset|promise|symbol)\>"
+icolor white "\<(number|object|regexp|string)\>"
+
+## First operator color
+color cyan "[.:+*|=?!\%()]" "<" ">" "/" "-" "&"
+
+## Second operator color
+color green "[,;{}]" "\[" "\]" "\s+(=)\s+"
+
+## Comments
+color red "//.*"
+color red "/\*.+\*/"
+
+## Reminders
+color brightyellow,white "TODO:?"
+
+## Strings
+color blue ""(\\.|[^"])*"|'(\\.|[^'])*'|(`|\})(\\.|[^`$]|$[^{])*(\$\{|`)"
+
+## Trailing whitespace
+color ,green "[[:space:]]+$"
+color ,red "	+ +| +	+"

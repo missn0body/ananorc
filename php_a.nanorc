@@ -1,0 +1,56 @@
+## PHP Syntax Highlighting
+syntax "PHP" "\.php[2345s~]?$|\.module$"
+magic "PHP script"
+comment "//"
+
+## All text
+color brightblack start="<\?(php|=)?" end="\?>"
+
+# Numbers
+color magenta "[+-]*([0-9]\.)*[0-9]+([eE][+-]?([0-9]\.)*[0-9])*"
+color magenta "0x[0-9a-zA-Z]*"
+
+# Constructs
+color white "(class|extends|goto) ([a-zA-Z0-9_]*)"
+color white "[^a-z0-9_-]{1}(var|class|function|echo|case|break|default|exit|switch|if|else|elseif|endif|for|foreach|endforeach|@|while|public|private|protected|return|true|false|null|TRUE|FALSE|NULL|const|static|extends|as|array|require|include|require_once|include_once|define|do|continue|declare|goto|print|in|namespace|use)[^a-z0-9_-]{1}"
+
+# Special values
+color white "[^a-z0-9_-]{1}(true|false|null|TRUE|FALSE|NULL)$"
+color white "[^a-z0-9_-]{1}(true|false|null|TRUE|FALSE|NULL)[^a-z0-9_-]{1}"
+
+# Variable names
+#color magenta "\$[A-Za-z_][A-Za-z_0-9]*"
+
+# Functions
+#color blue "([a-zA-Z0-9_-]*)\("
+
+# Heredoc (typically ends with a semicolon).
+#color red start="<<<['\"]?[A-Z][A-Z0-9_]*['\"]?" end="^[A-Z][A-Z0-9_]*;"
+
+## First operator color
+color cyan "[.:+*|=?!\%()]" "<" ">" "/" "-" "&"
+
+## Second operator color
+color green "[,;{}]" "\[" "\]" "\s+(=)\s+"
+
+## Single-quoted stuff
+color yellow "'(\^.|[^'])*'"
+
+## Strings
+color blue ""(\^.|[^"])*""
+
+# General HTML
+color brightblack start="\?>" end="<\?(php|=)?"
+
+# PHP Tags
+color green "(<\?(php)?|\?>)"
+
+## Comments
+color red "//[^"]*$|(^|[[:blank:]])//.*"
+color red start="/\*" end="\*/"
+
+# Nowdoc
+#color red start="<<<'[A-Z][A-Z0-9_]*'" end="^[A-Z][A-Z0-9_]*;"
+
+# Trailing whitespace
+color ,green "[[:space:]]+$"

@@ -1,0 +1,28 @@
+syntax "CSS" "\.(css|scss|less)$"
+
+## All words
+color brightblack "[a-zA-Z_]+"
+
+## All numbers (only decimal)
+color magenta "-?[0-9]+"
+
+## Most common HTML tags
+icolor cyan "\<(p|a|img|ul|ol|li|table|tr|th|td|form|input|button|h[0-9]|label)\>"
+
+## Pseudo-classes
+color white ":active|:focus|:hover|:link|:visited|:link|:after|:before|$"
+
+## Properties
+color white ".*:"
+
+## Operators
+color green "[.,:;{}#]" "\[" "\]"
+
+## Strings
+color blue ""(\^.|[^"])*""
+
+## Comments
+color red   start="\/\*" end="\*\/"
+
+## Trailing spaces
+color ,green "[[:space:]]+$"
